@@ -2,8 +2,10 @@ import { invariant } from "ts-invariant";
 import { RootWrapper } from "./pageWrapper";
 
 export const metadata = {
-	title: "Checkout · Saleor Storefront example",
+	title: "Checkout",
 };
+
+const companyName = process.env.STORE_LOGO || "harshita";
 
 export default function CheckoutPage({
 	searchParams,
@@ -21,7 +23,7 @@ export default function CheckoutPage({
 			<section className="mx-auto flex min-h-dvh max-w-7xl flex-col p-8">
 				<div className="flex items-center font-bold">
 					<a aria-label="homepage" href="/">
-						ACME
+						{companyName}
 					</a>
 				</div>
 				<h1 className="mt-8 text-3xl font-bold text-neutral-900">Checkout</h1>

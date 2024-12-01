@@ -21,7 +21,7 @@ export const Money = <TMoney extends MoneyType>({
 	}
 
 	return (
-		<p {...textProps} aria-label={ariaLabel} className={className}>
+		<p {...textProps} aria-label={ariaLabel} className={`${className} text-[#FF6633]`}>
 			{formattedMoney}
 		</p>
 	);

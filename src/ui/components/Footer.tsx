@@ -26,8 +26,8 @@ export async function Footer({ channel }: { channel: string }) {
 					{footerLinks.menu?.items?.map((item) => {
 						return (
 							<div key={item.id}>
-								<h3 className="text-sm font-semibold text-neutral-900">{item.name}</h3>
-								<ul className="mt-4 space-y-4 [&>li]:text-neutral-500">
+								<h3 className=" text-sm font-semibold">{item.name}</h3>
+								<ul className="mt-4 space-y-4 [&>li]:text-neutral-900">
 									{item.children?.map((child) => {
 										if (child.category) {
 											return (
@@ -79,11 +79,11 @@ export async function Footer({ channel }: { channel: string }) {
 					</div>
 				)}
 
-				<div className="flex flex-col justify-between border-t border-neutral-200 py-10 sm:flex-row">
-					<p className="text-sm text-neutral-500">
+				<div className="flex flex-col justify-between border-t border-[#FFF] py-10 sm:flex-row">
+					<p className="text-sm text-neutral-900">
 						Copyright &copy; {currentYear} {process.env.STORE_TITLE}
 					</p>
-					<p className="flex gap-1 text-sm text-neutral-500">Powered by {process.env.POWERED_BY}</p>
+					<p className="flex gap-1 text-sm text-neutral-900">Powered by {process.env.POWERED_BY}</p>
 				</div>
 			</div>
 		</footer>

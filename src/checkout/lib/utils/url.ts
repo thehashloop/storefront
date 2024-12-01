@@ -21,6 +21,11 @@ const queryParamsMap = {
 	// stripe
 	payment_intent: "paymentIntent",
 	payment_intent_client_secret: "paymentIntentClientSecret",
+
+	// razorpay
+	razorpay_payment_id: "razorpayPaymentId",
+	razorpay_order_id: "razorpayOrderId",
+	razorpay_signature: "razorpaySignature",
 } as const;
 
 type UnmappedQueryParam = keyof typeof queryParamsMap;

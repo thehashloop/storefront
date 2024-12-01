@@ -1,10 +1,11 @@
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
+import "./fonts.css";
 import "./globals.css";
 import { type ReactNode } from "react";
 import { type Metadata } from "next";
 import { DraftModeNotification } from "@/ui/components/DraftModeNotification";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Storefront",
@@ -19,7 +20,7 @@ export default function RootLayout(props: { children: ReactNode }) {
 
 	return (
 		<html lang="en" className="min-h-dvh">
-			<body className={`${inter.className} min-h-dvh`}>
+			<body className={`min-h-dvh`}>
 				{children}
 				<DraftModeNotification />
 			</body>

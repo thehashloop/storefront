@@ -9,6 +9,8 @@ import { type OptionalAddress, type AddressField } from "@/checkout/components/A
 import { defaultCountry } from "@/checkout/lib/consts/countries";
 import { getOrderedAddressFields, getRequiredAddressFields } from "@/checkout/components/AddressForm/utils";
 
+const isEnglishText = (text: string): boolean => /^[A-Za-z\s&]+$/.test(text);
+
 export type AddressFieldLabel = Exclude<AddressField, "countryCode"> | "country";
 export const addressFieldMessages: Record<AddressFieldLabel, string> = {
 	city: "City",
@@ -31,7 +33,8 @@ export type LocalizedAddressFieldLabel =
 	| "zip"
 	| "postal"
 	| "postTown"
-	| "prefecture";
+	| "prefecture"
+	| "pin";
 export const localizedAddressFieldMessages: Record<LocalizedAddressFieldLabel, string> = {
 	province: "Province",
 	district: "District",
@@ -40,6 +43,7 @@ export const localizedAddressFieldMessages: Record<LocalizedAddressFieldLabel, s
 	postal: "Postal code",
 	postTown: "Post town",
 	prefecture: "Prefecture",
+	pin: "PIN code",
 };
 
 export const useAddressFormUtils = (countryCode: CountryCode = defaultCountry) => {
@@ -127,5 +131,8 @@ export const useAddressFormUtils = (countryCode: CountryCode = defaultCountry) =
 		getMissingFieldsFromAddress,
 		...validationRules,
 		allowedFields: validationRules?.allowedFields as AddressField[] | undefined,
+		countryAreaChoices: validationRules?.countryAreaChoices.filter((choice) =>
+			isEnglishText(choice.verbose || ""),
+		),
 	};
 };

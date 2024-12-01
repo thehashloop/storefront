@@ -31,7 +31,7 @@ export function ProductElement({
 								{product.category?.name}
 							</p>
 						</div>
-						<p className="mt-1 text-sm font-medium text-neutral-900" data-testid="ProductElement_PriceRange">
+						<p className="mt-1 text-sm font-medium text-[#FF6633]" data-testid="ProductElement_PriceRange">
 							{formatMoneyRange({
 								start: product?.pricing?.priceRange?.start?.gross,
 								stop: product?.pricing?.priceRange?.stop?.gross,

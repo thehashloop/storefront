@@ -10,6 +10,32 @@ query ProductDetails($slug: String!, $channel: String!) {
 			url
 			alt
 		}
+		attributes {
+			attribute {
+				id
+				name
+				slug
+				inputType
+				entityType
+				withChoices
+				unit
+			}
+			values {
+				id
+				name
+				slug
+				richText
+				reference
+				file {
+					url
+					contentType
+				}
+				boolean
+				date
+				dateTime
+				value
+			}
+		}
 		category {
 			id
 			name

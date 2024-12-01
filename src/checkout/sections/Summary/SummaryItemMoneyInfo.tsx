@@ -22,7 +22,7 @@ export const SummaryItemMoneyInfo: React.FC<SummaryItemMoneyInfoProps> = ({
 
 	return (
 		<div className="flex flex-col items-end justify-end">
-			<div className="flex flex-row flex-wrap justify-end gap-x-2">
+			<div className="flex flex-row flex-wrap justify-end gap-x-2 text-[#FF6633]">
 				{onSale && (
 					<Money
 						ariaLabel="undiscounted price"

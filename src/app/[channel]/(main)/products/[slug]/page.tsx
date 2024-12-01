@@ -14,6 +14,48 @@ import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } 
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
 
+function renderRichText(richText: string | null | undefined) {
+	if (!richText) return null;
+
+	try {
+		const parsed = JSON.parse(richText) as {
+			blocks: Array<{
+				type: string;
+				data: {
+					items?: string[];
+					text?: string;
+				};
+			}>;
+		};
+
+		const block = parsed.blocks[0];
+
+		switch (block.type) {
+			case "list":
+				return (
+					<ul className="list-disc space-y-2 pl-4">
+						{block.data.items?.map((item) => (
+							<li key={item} dangerouslySetInnerHTML={{ __html: xss(item) }} />
+						))}
+					</ul>
+				);
+			case "paragraph":
+				return block.data.text ? (
+					<div
+						dangerouslySetInnerHTML={{
+							__html: xss(block.data.text.replace(/\*/g, '<span class="text-[#FF6633]">*</span>')),
+						}}
+					/>
+				) : null;
+			default:
+				return null;
+		}
+	} catch (error) {
+		console.error("Error parsing rich text:", error);
+		return null;
+	}
+}
+
 export async function generateMetadata(
 	{
 		params,
@@ -56,7 +98,7 @@ export async function generateMetadata(
 							alt: product.name,
 						},
 					],
-			  }
+				}
 			: null,
 	};
 }
@@ -132,11 +174,11 @@ export default async function Page({
 	const price = selectedVariant?.pricing?.price?.gross
 		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
 		: isAvailable
-		  ? formatMoneyRange({
+			? formatMoneyRange({
 					start: product?.pricing?.priceRange?.start?.gross,
 					stop: product?.pricing?.priceRange?.stop?.gross,
-		    })
-		  : "";
+				})
+			: "";
 
 	const productJsonLd: WithContext<Product> = {
 		"@context": "https://schema.org",
@@ -154,7 +196,7 @@ export default async function Page({
 						priceCurrency: selectedVariant.pricing?.price?.gross.currency,
 						price: selectedVariant.pricing?.price?.gross.amount,
 					},
-			  }
+				}
 			: {
 					name: product.name,
 
@@ -168,7 +210,7 @@ export default async function Page({
 						lowPrice: product.pricing?.priceRange?.start?.gross.amount,
 						highPrice: product.pricing?.priceRange?.stop?.gross.amount,
 					},
-			  }),
+				}),
 	};
 
 	return (
@@ -188,15 +230,16 @@ export default async function Page({
 							width={1024}
 							height={1024}
 							src={firstImage.url}
+							isSticky={true}
 						/>
 					)}
 				</div>
-				<div className="flex flex-col pt-6 sm:col-span-1 sm:px-6 sm:pt-0 lg:col-span-3 lg:pt-16">
+				<div className="flex flex-col pt-6 sm:col-span-1 sm:px-6 sm:pt-0 lg:col-span-3 lg:pt-0">
 					<div>
 						<h1 className="mb-4 flex-auto text-3xl font-medium tracking-tight text-neutral-900">
 							{product?.name}
 						</h1>
-						<p className="mb-8 text-sm " data-testid="ProductElement_Price">
+						<p className="mb-8 text-sm text-[#FF6633]" data-testid="ProductElement_Price">
 							{price}
 						</p>
 
@@ -213,10 +256,49 @@ export default async function Page({
 							<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
 						</div>
 						{description && (
-							<div className="mt-8 space-y-6 text-sm text-neutral-500">
+							<div className="mt-8 space-y-6 border-t border-[#E1D9D5] pt-8 text-sm text-neutral-500">
+								<h2 className="mb-4 text-left text-xl  text-[#FF073A]">Description</h2>
+
 								{description.map((content) => (
 									<div key={content} dangerouslySetInnerHTML={{ __html: xss(content) }} />
 								))}
+							</div>
+						)}
+
+						{/* keyingredients */}
+						{product.attributes?.some(({ attribute }) => attribute.slug === "key-ingredients") && (
+							<div className="mt-8 space-y-6 border-t border-[#E1D9D5] pt-8 text-sm text-neutral-500">
+								<h2 className="mb-4 text-left text-xl font-medium text-[#FF073A]">Key Ingredients</h2>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: xss(
+											product.attributes.find(({ attribute }) => attribute.slug === "key-ingredients")
+												?.values[0]?.name || "",
+										),
+									}}
+								/>
+							</div>
+						)}
+
+						{/* keybenefits */}
+						{product.attributes?.some(({ attribute }) => attribute.slug === "key-benefits") && (
+							<div className="mt-8 space-y-6 border-t border-[#E1D9D5] pt-8 text-sm text-neutral-500">
+								<h2 className="mb-4 text-left text-xl font-medium text-[#FF073A]">Key Benefits</h2>
+								{renderRichText(
+									product.attributes.find(({ attribute }) => attribute.slug === "key-benefits")?.values[0]
+										?.richText,
+								)}
+							</div>
+						)}
+
+						{/* howtouse */}
+						{product.attributes?.some(({ attribute }) => attribute.slug === "how-to-use") && (
+							<div className="mt-8 space-y-6 border-t border-[#E1D9D5] pt-8 text-sm text-neutral-500">
+								<h2 className="mb-4 text-left text-xl font-medium text-[#FF073A]">How to Use</h2>
+								{renderRichText(
+									product.attributes.find(({ attribute }) => attribute.slug === "how-to-use")?.values[0]
+										?.richText,
+								)}
 							</div>
 						)}
 					</div>

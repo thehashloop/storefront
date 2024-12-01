@@ -1,18 +1,19 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { NavLink } from "./NavLink";
-import { executeGraphQL } from "@/lib/graphql";
-import { MenuGetBySlugDocument } from "@/gql/graphql";
+// import { executeGraphQL } from "@/lib/graphql";
+// import { MenuGetBySlugDocument } from "@/gql/graphql";
 
 export const NavLinks = async ({ channel }: { channel: string }) => {
-	const navLinks = await executeGraphQL(MenuGetBySlugDocument, {
-		variables: { slug: "navbar", channel },
-		revalidate: 60 * 60 * 24,
-	});
+	console.log("channel", channel);
+	// const navLinks = await executeGraphQL(MenuGetBySlugDocument, {
+	// 	variables: { slug: "navbar", channel },
+	// 	revalidate: 60 * 60 * 24,
+	// });
 
 	return (
 		<>
 			<NavLink href="/products">All</NavLink>
-			{navLinks.menu?.items?.map((item) => {
+			{/* {navLinks.menu?.items?.map((item) => {
 				if (item.category) {
 					return (
 						<NavLink key={item.id} href={`/categories/${item.category.slug}`}>
@@ -42,7 +43,7 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 					);
 				}
 				return null;
-			})}
+			})} */}
 		</>
 	);
 };

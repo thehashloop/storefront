@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
 											<p className="mt-1 text-sm text-neutral-500">Variant: {item.variant.name}</p>
 										)}
 									</div>
-									<p className="text-right font-semibold text-neutral-900">
+									<p className="text-right font-semibold text-[#FF6633]">
 										{formatMoney(item.totalPrice.gross.amount, item.totalPrice.gross.currency)}
 									</p>
 								</div>
@@ -89,7 +89,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
 								<p className="font-semibold text-neutral-900">Your Total</p>
 								<p className="mt-1 text-sm text-neutral-500">Shipping will be calculated in the next step</p>
 							</div>
-							<div className="font-medium text-neutral-900">
+							<div className="font-medium text-[#FF6633]">
 								{formatMoney(checkout.totalPrice.gross.amount, checkout.totalPrice.gross.currency)}
 							</div>
 						</div>

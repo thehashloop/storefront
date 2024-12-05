@@ -2,6 +2,7 @@ import { LaurelAnimation } from "@/ui/components/LaurelAnimation";
 import { ProductListByCollectionDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 import { ProductList } from "@/ui/components/ProductList";
+import { LinkWithChannel } from "@/ui/atoms/LinkWithChannel";
 
 export const metadata = {
 	title: "Storefront",
@@ -38,60 +39,78 @@ export default async function Page({ params }: { params: { channel: string } }) 
 				<div className="relative mx-auto w-full max-w-[1200px] gap-8 overflow-clip rounded-xl bg-transparent px-1 py-6 md:px-1 md:py-6">
 					<div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 						{/* Card 1 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#e6ffd7]">
+						<LinkWithChannel
+							href="/categories/ayurvedic-blends"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#e6ffd7]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold lg:text-5xl">
 									Ayurvedic Blends
 								</p>
 							</div>
 							<div className="flex min-h-[200px] items-center justify-center"></div>
-						</div>
+						</LinkWithChannel>
 						{/* Card 2 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#d9fff6]">
+						<LinkWithChannel
+							href="/categories/nutraherbs"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#d9fff6]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold lg:text-5xl">
 									Nutraherbs
 								</p>
 							</div>
 							<div className="flex min-h-[200px] justify-center"></div>
-						</div>
+						</LinkWithChannel>
 						{/* Card 3 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#daf4ff]">
+						<LinkWithChannel
+							href="/categories/nutrition-supplements"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#daf4ff]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold  lg:text-5xl">
 									Nutritional Supplements
 								</p>
 							</div>
 							<div className="flex min-h-[200px] justify-center"></div>
-						</div>
+						</LinkWithChannel>
 
 						{/* Card 4 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#daebff]">
+						<LinkWithChannel
+							href="/categories/body-and-bath"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#daebff]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold  lg:text-5xl">
 									Body and Bath
 								</p>
 							</div>
 							<div className="flex min-h-[200px] justify-center"></div>
-						</div>
+						</LinkWithChannel>
 						{/* Card 5 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#dbe0ff]">
+						<LinkWithChannel
+							href="/categories/organic-farming"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#dbe0ff]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold  lg:text-5xl">
 									Organic Farming
 								</p>
 							</div>
 							<div className="flex min-h-[200px] justify-center"></div>
-						</div>
+						</LinkWithChannel>
 						{/* Card 6 */}
-						<div className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#f2ddff]">
+						<LinkWithChannel
+							href="/categories/animal-feed-supplements"
+							className="shadow-fade grid grid-cols-1 grid-rows-[auto_1fr] overflow-hidden rounded-2xl bg-[#f2ddff]"
+						>
 							<div className="px-[20px] py-[20px]">
 								<p className="!leading-xs md:!leading-h1 pb-3 text-[32px] font-bold lg:text-5xl">
 									Animal Feed Supplements
 								</p>
 							</div>
 							<div className="flex min-h-[200px] justify-center"></div>
-						</div>
+						</LinkWithChannel>
 					</div>
 				</div>
 			</section>

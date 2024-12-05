@@ -1,0 +1,19 @@
+query AllCollectionsWithProducts($channel: String!, $first: Int!) {
+	collections(first: $first, channel: $channel) {
+		edges {
+			node {
+				id
+				name
+				description
+				slug
+				products(first: 100) {
+					edges {
+						node {
+							...ProductListItem
+						}
+					}
+				}
+			}
+		}
+	}
+}

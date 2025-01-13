@@ -36,6 +36,7 @@
 		"react-spinners": "0.13.8",
 		"react-test-renderer": "18.2.0",
 		"react-toastify": "9.1.3",
+		"saleor-storefront": "file:",
 		"sharp": "0.33.2",
 		"ts-invariant": "0.10.3",
 		"url-join": "5.0.0",
